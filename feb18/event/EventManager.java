@@ -1,6 +1,5 @@
 package feb18.event;
 
-
 import java.util.Scanner;
 
 public class EventManager {
@@ -104,6 +103,9 @@ public class EventManager {
                 }
             }
             if (eventList[i] != null && eventList[i].name != null) {
+                if (num != 1 && eventList[i].hide) {
+                    continue;
+                }
                 System.out.print("이벤트 명: " + eventList[i].name);
                 System.out.println(" || 이벤트 설명: " + eventList[i].description);
             }
@@ -113,7 +115,7 @@ public class EventManager {
 
     public boolean duplicateCheck(String search) {
         for (int j = 0; j < eventList.length; j++) {
-            if (search.equals(eventList[j].name)) {
+            if (eventList[j] != null && search.equals(eventList[j].name)) {
                 return true;
             }
         }
