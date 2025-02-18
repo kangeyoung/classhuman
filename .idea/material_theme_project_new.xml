@@ -3,7 +3,9 @@
   <component name="MaterialThemeProjectNewConfig">
     <option name="metadata">
       <MTProjectMetadataState>
-        <option name="userId" value="-48db360:195165bafb3:-7e60" />
+        <option name="migrated" value="true" />
+        <option name="pristineConfig" value="false" />
+        <option name="userId" value="-3144c146:19511d5513f:-7ffe" />
       </MTProjectMetadataState>
     </option>
   </component>
