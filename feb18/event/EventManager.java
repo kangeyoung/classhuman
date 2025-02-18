@@ -97,11 +97,6 @@ public class EventManager {
         int num = in.nextInt();
         in.nextLine();
         for (int i = 0; i < eventList.length; i++) {
-            if (num != 1) {
-                if (eventList[i].hide) {
-                    continue;
-                }
-            }
             if (eventList[i] != null && eventList[i].name != null) {
                 if (num != 1 && eventList[i].hide) {
                     continue;
