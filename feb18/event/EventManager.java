@@ -54,7 +54,7 @@ public class EventManager {
         String modify;
         String modifyD;
         if (search == null) {
-            System.out.println("상위 메뉴로 돌아갑니다.");
+            System.out.println("검색어를 찾을 수 없습니다. \n상위 메뉴로 돌아갑니다.");
         } else {
             System.out.println("------이벤트 수정------");
             System.out.print("1. 이벤트 수정 2. 이벤트 삭제 \n다른 번호를 누르면 상위 메뉴로 돌아갑니다.");
