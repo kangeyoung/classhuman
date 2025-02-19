@@ -35,18 +35,18 @@ public class EventManager {
         if (search.isEmpty()) {
             return null;
         }
-        Event result = search(search);
+        Event result = eventList[search(search)];
         System.out.println("-검색 결과- \n이벤트 이름: " + result.name + "|| 이벤트 설명: " + result.description);
-        return search(search).name;
+        return result.name;
     }
 
-    public Event search(String search) {
+    public int search(String search) {
         for (int j = 0; j < eventList.length; j++) {
-            if (search.equals(eventList[j].name)) {
-                return eventList[j];
+            if (eventList[j] != null && search.equals(eventList[j].name)) {
+                return j;
             }
         }
-        return null;
+        return -1;
     }
 
     public void modifyEvent() {
@@ -121,7 +121,7 @@ public class EventManager {
         System.out.println("------이벤트 등록-------");
         System.out.println("이벤트 명을 입력해주세요");
         String name = in.nextLine();
-        if (duplicateCheck(name)) {
+        if (search(name) != -1) {
             System.out.println("이벤트 명이 중복됩니다. \n 상위메뉴로 돌아갑니다.");
             return;
         }
