@@ -37,8 +37,7 @@ public class Member {
             }else if(num == 2) {
                 for(int i = 0; i < memoList.length; i++) {
                     if (memoList[i] != null) {
-                        System.out.println("제목: "+memoList[i].title);
-                        System.out.println("    내용: "+memoList[i].content);
+                        memoList[i].prt();
                     }
                 }
             }else{
@@ -64,6 +63,22 @@ public class Member {
                 }
             }
         }
-
+    }
+    public void prt() {
+        System.out.print("아이디: " + id);
+        System.out.print(" 이름: " + name);
+        System.out.print(" 주소: " + address);
+        if (minors) {
+            System.out.println(" 미성년자");
+        }else{
+            System.out.println();
+        }
+        if (hobbyList[1] != null) {
+            System.out.print("취미: ");
+            for(int j = 0; j<hobbyList.length ; j++){
+                System.out.print(hobbyList[j]+" ");
+            }
+            System.out.println();
+        }
     }
 }

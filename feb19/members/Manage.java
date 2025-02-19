@@ -81,7 +81,7 @@ public class Manage {
         String searId = sc.nextLine();
         int sNum = searchIdNew(searId);
         if (sNum != -1) {
-            prt(sNum);
+            memberList[sNum].prt();
             return;
         }
         System.out.println("찾을 수 없습니다.");
@@ -91,7 +91,7 @@ public class Manage {
 
         for (int i = 0; i < memberList.length; i++) {
             int loc = 0;
-            if(memberList[i]!=null) {
+            if (memberList[i] != null) {
                 for (int j = 0; j < memberList[i].id.length(); j++) {
                     if (b.charAt(0) == memberList[i].id.charAt(j)) {
                         loc = j;
@@ -113,26 +113,8 @@ public class Manage {
     private void printMember() {
         for (int i = 0; i < memberList.length; i++) {
             if (memberList[i] != null) {
-                prt(i);
+                memberList[i].prt();
             }
-        }
-    }
-
-    public void prt(int i) {
-        System.out.print("아이디: " + memberList[i].id);
-        System.out.print(" 이름: " + memberList[i].name);
-        System.out.print(" 주소: " + memberList[i].address);
-        if (memberList[i].minors) {
-            System.out.println(" 미성년자");
-        }else{
-            System.out.println();
-        }
-        if (memberList[i].hobbyList[1] != null) {
-            System.out.print("취미: ");
-            for(int j = 0; j<memberList[i].hobbyList.length ; j++){
-                System.out.print(memberList[i].hobbyList[j]+" ");
-            }
-            System.out.println();
         }
     }
 
@@ -156,9 +138,7 @@ public class Manage {
         int minors = sc.nextInt();
         sc.nextLine();
         Member member = new Member(id, name, address, minors);
-        for (
-                int i = 0;
-                i < memberList.length; i++) {
+        for (int i = 0; i < memberList.length; i++) {
             if (memberList[i] == null) {
                 memberList[i] = member;
                 break;
