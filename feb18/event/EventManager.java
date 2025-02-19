@@ -108,15 +108,6 @@ public class EventManager {
         }
     }
 
-    public boolean duplicateCheck(String search) {
-        for (int j = 0; j < eventList.length; j++) {
-            if (eventList[j] != null && search.equals(eventList[j].name)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     private void add() {
         System.out.println("------이벤트 등록-------");
         System.out.println("이벤트 명을 입력해주세요");
