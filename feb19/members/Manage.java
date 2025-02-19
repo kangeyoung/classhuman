@@ -46,7 +46,7 @@ public class Manage {
 
     private void modMember() {
         System.out.println("------Modify MemberList------");
-        System.out.println("수정할 아이디를 입력해주세요");
+        System.out.println("수정시킬 아이디를 입력해주세요");
         String id = sc.nextLine();
         int i = searchId(id);
         if (i != -1) {
@@ -54,17 +54,14 @@ public class Manage {
             int num = sc.nextInt();
             sc.nextLine();
             if (num == 1) {
-                System.out.println("수정할 이름을 입력해주세요");
-                memberList[i].name = sc.nextLine();
-                System.out.println("수정할 주소를 입력해주세요");
-                memberList[i].address = sc.nextLine();
-                System.out.println("미성년자 여부를 체크하세요 \n1. 성년 2. 미성년");
-                int minors = sc.nextInt();
+                System.out.println("1. 전체 수정 2. 부분 수정 \n(아이디는 바꿀 수 없습니다.)");
+                num = sc.nextInt();
                 sc.nextLine();
-                if (minors == 1) {
-                    memberList[i].minors = false;
+                if (num == 1) {
+                    modifyAll(i);
+                } else if (num == 2) {
+                    modifyPart(i);
                 }
-                memberList[i].minors = true;
             } else if (num == 2) {
                 memberList[i] = null;
             } else if (num == 3) {
@@ -72,6 +69,36 @@ public class Manage {
             }
         } else {
             System.out.println("아이디를 잘못 입력하셨습니다.");
+        }
+    }
+
+    public void modifyAll(int i) {
+        System.out.println("수정할 이름을 입력해주세요");
+        memberList[i].name = sc.nextLine();
+        System.out.println("수정할 주소를 입력해주세요");
+        memberList[i].address = sc.nextLine();
+        System.out.println("미성년자 여부를 체크하세요 \n1. 성년 2. 미성년");
+        int minors = sc.nextInt();
+        sc.nextLine();
+        memberList[i].minors = minors != 1;
+    }
+
+    public void modifyPart(int i) {
+        while(true) {
+            System.out.println("정보 수정을 원하시는 부분을 입력해주세요 ex) name \n 종료를 입력하면 수정을 마칩니다");
+            String con = sc.nextLine();
+            if (con.equals("name")) {
+                memberList[i].name = con;
+            } else if (con.equals("address")) {
+                memberList[i].address = con;
+            } else if (con.equals("minors")) {
+                System.out.println("1. 성년 2. 미성년자");
+                int minors = sc.nextInt();
+                sc.nextLine();
+                memberList[i].minors = minors != 1;
+            } else if (con.equals("종료")) {
+                return;
+            }
         }
     }
 
@@ -156,7 +183,8 @@ public class Manage {
     }
 
     private void menu() {
-        System.out.println("1. Add Member 2. Print Memberlist 3. Search Member 4. Modify Memberlist 5. Add memo 6. Exit");
+        System.out.println("1. Add Member 2. Print Memberlist 3. Search Member " +
+                "4. Modify Memberlist 5. Add memo 6. Exit");
     }
 
 
