@@ -84,7 +84,7 @@ public class Manage {
     }
 
     public void modifyPart(int i) {
-        while(true) {
+        while (true) {
             System.out.println("정보 수정을 원하시는 부분을 입력해주세요 ex) name \n 종료를 입력하면 수정을 마칩니다");
             String con = sc.nextLine();
             if (con.equals("name")) {
@@ -106,35 +106,40 @@ public class Manage {
         System.out.println("------Search Member------");
         System.out.println("검색할 아이디를 입력해주세요(부분검색가능)");
         String searId = sc.nextLine();
-        int sNum = searchIdNew(searId);
-        if (sNum != -1) {
-            memberList[sNum].prt();
-            return;
+        int[] sNum = searchIdNew(searId);
+        int cnt = 0;
+        for(int i = 0; i < sNum.length; i++) {
+            if (sNum[i] == 1) {
+                memberList[i].prt();
+                cnt++;
+            }
         }
-        System.out.println("찾을 수 없습니다.");
+        if(cnt == 0){
+            System.out.println("찾을 수 없습니다.");
+        }
     }
 
-    public int searchIdNew(String b) {
-
+    public int[] searchIdNew(String b) {
+        int[] index = new int[memberList.length];
         for (int i = 0; i < memberList.length; i++) {
+            if (memberList[i] == null) {
+                continue;
+            }
             int loc = 0;
-            if (memberList[i] != null) {
-                for (int j = 0; j < memberList[i].id.length(); j++) {
-                    if (b.charAt(0) == memberList[i].id.charAt(j)) {
-                        loc = j;
-                        break;
-                    }
+            for (int j = 0; j + loc < memberList[i].id.length(); ) {
+                if(b.charAt(j) == memberList[i].id.charAt(j + loc)) {
+                    j++;
+                }else{
+                    loc++;
+                    j= 0;
                 }
-                for (int j = 0; j < b.length(); j++) {
-                    if (b.charAt(j) != memberList[i].id.charAt(j + loc)) {
-                        break;
-                    } else if (j == b.length() - 1) {
-                        return i;
-                    }
+                if(j == b.length()){
+                    index[i] = 1;
+                    break;
                 }
             }
         }
-        return -1;
+        return index;
     }
 
     private void printMember() {
