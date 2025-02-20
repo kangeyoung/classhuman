@@ -29,7 +29,6 @@ public class Manage {
                 System.out.println("번호 잘못 입력함");
             }
         }
-
     }
 
     private void addMemo() {
