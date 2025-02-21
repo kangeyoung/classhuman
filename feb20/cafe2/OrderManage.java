@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class OrderManage {
     Scanner sc = new Scanner(System.in);
-    Order[] orderList = new Order[5];
+    Order[] orderList;
     Menu[] menuList;
     Review[] reviewList;
 
@@ -45,7 +45,6 @@ public class OrderManage {
         for (int i = 0; i < 20; i++) {
             if (reviewList[i] != null && cName.equals(reviewList[i].cName)) {
                 reviewList[i].prtReview();
-                break;
             }
         }
     }

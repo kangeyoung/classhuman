@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class MenuManage {
     Scanner sc = new Scanner(System.in);
-    Menu[] menuList = new Menu[5];
+    Menu[] menuList;
     Review[] reviewList;
 
     MenuManage(Manage manage) {
@@ -40,7 +40,6 @@ public class MenuManage {
         for (int i = 0; i < 20; i++) {
             if (reviewList[i] != null && mName.equals(reviewList[i].mName)) {
                 reviewList[i].prtReview();
-                break;
             }
         }
     }
