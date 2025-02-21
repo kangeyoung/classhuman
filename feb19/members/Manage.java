@@ -7,7 +7,7 @@ public class Manage {
     Member[] memberList = new Member[5];
     Scanner sc = new Scanner(System.in);
 
-    Manage() {
+    public Manage() {
         System.out.println("------Manage------");
         while (true) {
             menu();
