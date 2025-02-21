@@ -7,12 +7,14 @@ public class OrderManage {
     Order[] orderList = new Order[5];
     Menu[] menuList;
     Review[] reviewList;
-//    Manage mn = new Manage();
-    OrderManage(Menu[] menuList, Review[] reviewList) {
-        this.menuList = menuList;
-        this.reviewList = reviewList;
-        startOrder();
+
+    //    Manage mn = new Manage();
+    OrderManage(Manage manage) {
+        this.orderList = manage.orderList;
+        this.menuList = manage.menuList;
+        this.reviewList = manage.reviewList;
     }
+
     public void startOrder() {
         System.out.println("----------------");
         while (true) {
@@ -118,11 +120,11 @@ public class OrderManage {
         String name = sc.nextLine();
         Order order = new Order(name);
         for (int i = 0; i < orderList.length; i++) {
-            if (orderList[i] == null){
+            if (orderList[i] == null) {
                 orderList[i] = order;
                 orderList[i].OrderMenu(menuList);
                 break;
-            }else  if (orderList[i].name.equals(name)) {
+            } else if (orderList[i].name.equals(name)) {
                 orderList[i].OrderMenu(menuList);
                 break;
             } else if (i == 4) {

@@ -6,10 +6,10 @@ public class MenuManage {
     Scanner sc = new Scanner(System.in);
     Menu[] menuList = new Menu[5];
     Review[] reviewList;
-//    Manage mn = new Manage();
-    MenuManage(Review[] reviewList) {
-        this.reviewList = reviewList;
-        startMenu();
+
+    MenuManage(Manage manage) {
+        this.menuList = manage.menuList;
+        this.reviewList = manage.reviewList;
     }
     public void startMenu(){
         System.out.println("----------------");
@@ -35,10 +35,6 @@ public class MenuManage {
 
     private void reviewMenu() {
         System.out.println("-----Review------");
-        if (reviewList == null) {
-            System.out.println("등록된 리뷰가 없습니다.");
-            return;
-        }
         System.out.println("메뉴명을 입력해주세요.");
         String mName = sc.nextLine();
         for (int i = 0; i < 20; i++) {
