@@ -8,9 +8,11 @@ public class Technician {
         this.techName = techName;
     }
 
-    public void addCarNum(String carNum){
-        for(int i = 0;i<this.carNum.length; i++){
-            if(this.carNum[i] == null){
+    public void addCarNum(String carNum) {
+        for (int i = 0; i < this.carNum.length; i++) {
+            if (this.carNum[i] != null && this.carNum[i].equals(carNum)) {
+                System.out.println("중복");
+            } else if (this.carNum[i] == null) {
                 this.carNum[i] = carNum;
                 break;
             }
