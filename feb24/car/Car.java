@@ -3,7 +3,7 @@ package feb24.car;
 import java.util.Date;
 import java.util.Scanner;
 
-public class Car {
+public class Car { // 자동차 한대 책임
     private String carNum;
     private String carUser;
     private Repair[] repair = new Repair[10];

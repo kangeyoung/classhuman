@@ -2,14 +2,14 @@ package feb24.car;
 
 import java.util.Scanner;
 
-public class CarManage {
+public class CarManage { // 자동차 관리, Car 객체를 등록하고 수정하고 삭제하는 책임
     private Car[] carList = new Car[10];
 
     CarManage() {
+        Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
             System.out.println("1. 자동차 관리 2. 수리 정보");
-            Scanner sc = new Scanner(System.in);
             int num = sc.nextInt();
             sc.nextLine();
             switch (num) {
@@ -23,6 +23,7 @@ public class CarManage {
                     flag = false;
             }
         }
+        sc.close();
     }
 
     private void repairCar() {
@@ -48,6 +49,7 @@ public class CarManage {
             default:
                 break;
         }
+        sc.close();
     }
 
     private int searchCar(String carNum) {
