@@ -2,13 +2,14 @@ package feb25.Main;
 
 
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarM {
-    private CarOne[] carList = new CarOne[5];
-
-    public CarOne[] getCarList() {
-        return carList;
+//    private CarOne[] carList = new CarOne[5];
+    private ArrayList<CarOne> carList = new ArrayList<CarOne>();
+    public ArrayList<CarOne> getCarList() {
+        return this.carList;
     }
 
     public void menu() {
@@ -35,9 +36,9 @@ public class CarM {
 
     private void listCar() {
     for(CarOne c : carList){
-        if(c != null){
+//        if(c != null){
             c.prt();
-        }
+//        }
     }
     }
 
@@ -49,12 +50,13 @@ public class CarM {
         CarOne carone = new CarOne();
         carone.setNum(num);
         carone.setUserName(userName);
-        for(CarOne c : carList){
-            if(c == null){
-                c = carone;
-                break;
-            }
-        }
+//        for(CarOne c : carList){
+//            if(c == null){
+//                c = carone;
+//                break;
+//            }
+//        }
+        carList.add(carone);
     }
 
 

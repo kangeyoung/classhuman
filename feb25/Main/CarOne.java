@@ -1,14 +1,15 @@
 package feb25.Main;
 
 
-
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class CarOne {
     private String num;
     private String userName;
 
-    private RepairOne[] repairList = new RepairOne[5];
+    //    private RepairOne[] repairList = new RepairOne[5];
+    private ArrayList<RepairOne> repairList = new ArrayList<RepairOne>();
 
     public String getNum() {
         return num;
@@ -26,41 +27,36 @@ public class CarOne {
         this.userName = userName;
     }
 
-    public RepairOne[] getRepairList() {
-        return repairList;
-    }
-
-    public void setRepairList(RepairOne[] repairList) {
-        this.repairList = repairList;
-    }
-
     public void menu() {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
-        while(flag){
+        while (flag) {
             System.out.println("1. 수리등록 2. 전체보기");
             System.out.println("번호선택");
             int a = sc.nextInt();
             sc.nextLine();
-            switch(a){
+            switch (a) {
                 case 1:
                     addRepair();
                     break;
-                    case 2:
-                        listRepair();
-                        break;
-                        default:
-                            flag = false;
+                case 2:
+                    listRepair();
+                    break;
+                default:
+                    flag = false;
             }
         }
     }
 
     private void listRepair() {
-        for (int i = 0; i < repairList.length; i++) {
-            if(repairList[i] != null){
-                repairList[i].prt();
-            }
+
+        for (RepairOne repairOne : repairList) {
+//            if(repairList[i] != null){
+//                repairList[i].prt();
+//            }
+            repairOne.prt();
         }
+
     }
 
     private void addRepair() {
@@ -73,16 +69,17 @@ public class CarOne {
         repairOne.setDate(date);
         repairOne.setTitle(title);
         repairOne.setMemo(memo);
-        for(int i = 0; i < repairList.length; i++){
-            if (repairList[i] == null){
-                repairList[i] = repairOne;
-                break;
-            }
-        }
+        repairList.add(repairOne);
+//        for(int i = 0; i < repairList.length; i++){
+//            if (repairList[i] == null){
+//                repairList[i] = repairOne;
+//                break;
+//            }
+//        }
     }
 
     public void prt() {
-        System.out.println("차량번호: "+ this.num);
-        System.out.println("소유자: "+ this.userName);
+        System.out.println("차량번호: " + this.num);
+        System.out.println("소유자: " + this.userName);
     }
 }
