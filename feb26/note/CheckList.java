@@ -21,7 +21,7 @@ public class CheckList {
         return done;
     }
 
-    public String DoneEmo() {
+    public String doneEmo() {
         if (done) {
             return "\uF0FE";
         } else {

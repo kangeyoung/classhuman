@@ -5,9 +5,50 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class UserM {
-    private HashMap<User, NoteM> noteList = new HashMap<>(20);
+    // 회원 리스트
+    private HashMap<String, User> userList = new HashMap<>(20);
 
-    private void menu(User user) {
+    public HashMap<String, User> getUserList() {
+        return userList;
+    }
+
+    public void addUser(){
+        Scanner sc = new Scanner(System.in);
+        while(true) {
+            System.out.println("아이디 입력");
+            String id = sc.nextLine();
+            if (userList.containsKey(id)) {
+                System.out.println("아이디 중복");
+                continue;
+            }
+            System.out.println("비밀번호 입력");
+            String password = sc.nextLine();
+            NoteM noteM = new NoteM();
+            User user = new User();
+            user.setPass(password);
+            user.setNoteM(noteM);
+            userList.put(id,user);
+            return;
+        }
+    }
+
+    public void login(UserM uM){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("아이디 입력");
+        String id = sc.nextLine();
+        if(userList.containsKey(id)) {
+            System.out.println("비밀번호 입력");
+            String pass = sc.nextLine();
+            if(userList.get(id).getPass().equals(pass)) {
+                System.out.println("로그인 성공");
+                menu(id, uM);
+            }
+        }else{
+            System.out.println("아이디가 없습니다.");
+        }
+    }
+
+    private void menu(String id, UserM uM) {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
@@ -16,10 +57,10 @@ public class UserM {
             sc.nextLine();
             switch (num) {
                 case 1:
-                    editUser(user);
+                    editUser(id);
                     break;
                 case 2:
-                    noteList.get(user).startMenu();
+                    userList.get(id).getNoteM().startMenu(id,uM);
                     break;
                 case 3:
                     flag = false;
@@ -31,7 +72,7 @@ public class UserM {
         }
     }
 
-    private void editUser(User user) {
+    private void editUser(String id) {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
@@ -42,10 +83,11 @@ public class UserM {
                 case 1:
                     System.out.println("새 비밀번호 입력");
                     String pass = sc.nextLine();
-                    user.setPass(pass);
+                    userList.get(id).setPass(pass);
                     break;
                 case 2:
-                    noteList.remove(user);
+                    userList.remove(id);
+                    flag = false;
                     break;
                 case 3:
                     flag = false;
@@ -56,52 +98,4 @@ public class UserM {
             }
         }
     }
-
-    public void addUser() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            System.out.println("아이디 입력");
-            String id = sc.nextLine();
-            if (searchId(id) != null) {
-                System.out.println("아이디 중복");
-                continue;
-            }
-            System.out.println("비밀번호 입력");
-            String pass = sc.nextLine();
-            User user = new User(id, pass);
-            NoteM note = new NoteM();
-            noteList.put(user, note);
-            return;
-        }
-    }
-
-    public User searchId(String id) {
-        for (Map.Entry<User, NoteM> entry : noteList.entrySet()) {
-            if (entry.getKey().getId().equals(id)) {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
-    public void login() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("아이디 입력");
-        String id = sc.nextLine();
-        User user = searchId(id);
-        if (user != null) {
-            System.out.println("비밀번호 입력");
-            String pass = sc.nextLine();
-            if (user.getPass().equals(pass)) {
-                System.out.println("로그인 성공");
-                menu(user);
-            } else {
-                System.out.println("비밀번호가 틀렸습니다.");
-            }
-        } else {
-            System.out.println("아이디가 없습니다.");
-        }
-    }
-
-
 }

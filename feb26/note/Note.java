@@ -36,12 +36,16 @@ public class Note {
         return content;
     }
 
-    public String isOpen() {
+    public String StringOpen() {
         if (open) {
             return "-공개-";
         } else {
             return "-비공개-";
         }
+    }
+
+    public boolean isOpen() {
+        return open;
     }
 
     public void addChecklist() {
@@ -63,11 +67,11 @@ public class Note {
 
     public void prt() {
         if (checklists == null) {
-            System.out.println(title + getDate() + isOpen() + "\n -" + content);
+            System.out.println(title + getDate() + StringOpen() + "\n -" + content);
         } else {
-            System.out.println(title + getDate() + isOpen() + "\n -" + content);
+            System.out.println(title + getDate() + StringOpen() + "\n -" + content);
             for (CheckList checklist : checklists) {
-                System.out.println(checklist.DoneEmo() + " " + checklist.getContent());
+                System.out.println(checklist.doneEmo() + " " + checklist.getContent());
             }
         }
     }
@@ -75,7 +79,7 @@ public class Note {
     public void prtCheck() {
         for (CheckList checklist : checklists) {
             if (!checklist.isDone()) {
-                System.out.println(checklist.DoneEmo() + " " + checklist.getContent());
+                System.out.println(checklist.doneEmo() + " " + checklist.getContent());
             }
         }
     }
@@ -101,7 +105,6 @@ public class Note {
                     break;
             }
         }
-
     }
 
     private int searchContent(String content) {

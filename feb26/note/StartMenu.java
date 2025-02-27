@@ -15,12 +15,11 @@ public class StartMenu {
                     uM.addUser();
                     break;
                 case 2:
-                    uM.login();
+                    uM.login(uM);
                     break;
                 default:
                     return;
             }
         }
-
     }
 }

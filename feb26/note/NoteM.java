@@ -6,8 +6,13 @@ import java.util.Scanner;
 
 public class NoteM {
     private ArrayList<Note> notes = new ArrayList<>();
+    private ArrayList<Note> shareNotes = new ArrayList<>();
+    private UserM uM;
+    private String id;
 
-    public void startMenu() {
+    public void startMenu(String id,UserM uM) {
+        this.id = id;
+        this.uM = uM;
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while (flag) {
@@ -35,8 +40,52 @@ public class NoteM {
     }
 
     private void viewNote() {
-        for (Note note : notes) {
-            note.prt();
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. 내 노트 보기 2. 공유노트 보기 Others. 이전 메뉴");
+        int num = sc.nextInt();
+        sc.nextLine();
+        switch (num) {
+            case 1:
+                for (Note note : notes) {
+                    note.prt();
+                }
+                System.out.println("1. 노트 공유 Others. 이전 메뉴");
+                num = sc.nextInt();
+                sc.nextLine();
+                if (num == 1) {
+                    shareNote();
+                }
+                break;
+            case 2:
+                for (Note note : shareNotes) {
+                    note.prt();
+                }
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    private void shareNote() {
+        System.out.println("공유할 노트 제목 입력");
+        Scanner sc = new Scanner(System.in);
+        String title = sc.nextLine();
+        int cho = searchTitle(title);
+        if (cho != -1 && notes.get(cho).isOpen()) {
+            System.out.println("-----------");
+            for (String id : uM.getUserList().keySet()) {
+                if(!id.equals(this.id)) {
+                    System.out.println(id);
+                }
+            }
+            System.out.println("-----------");
+            System.out.println("공유할 아이디 입력");
+            String id = sc.nextLine();
+            uM.getUserList().get(id).getNoteM().shareNotes.add(notes.get(cho));
+            System.out.println("공유 완료");
+        } else {
+            System.out.println("노트를 찾을 수 없거나 비공개한 노트입니다.");
         }
     }
 
