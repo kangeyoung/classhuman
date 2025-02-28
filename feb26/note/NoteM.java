@@ -10,7 +10,7 @@ public class NoteM {
     private UserM uM;
     private String id;
 
-    public void startMenu(String id,UserM uM) {
+    public void startMenu(String id, UserM uM) {
         this.id = id;
         this.uM = uM;
         Scanner sc = new Scanner(System.in);
@@ -75,7 +75,7 @@ public class NoteM {
         if (cho != -1 && notes.get(cho).isOpen()) {
             System.out.println("-----------");
             for (String id : uM.getUserList().keySet()) {
-                if(!id.equals(this.id)) {
+                if (!id.equals(this.id)) {
                     System.out.println(id);
                 }
             }
@@ -114,7 +114,6 @@ public class NoteM {
     }
 
     private void editCheck(int i) {
-        Scanner sc = new Scanner(System.in);
         notes.get(i).editCheck();
     }
 
