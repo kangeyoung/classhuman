@@ -16,7 +16,6 @@ public class Postfix1 {
         for (int i = 0; i < cnt; i++) {
             infix[i] = st.nextToken();
         }
-
         for (int i = 0; i < cnt; i++) {
             String token = infix[i];
             postStack(token);
@@ -59,17 +58,19 @@ public class Postfix1 {
     }
 
     public int prior(String infix) {
-        if (infix.equals("*") || infix.equals("/")) {
-            return 1;
-        } else if (infix.equals("+") || infix.equals("-")) {
-            return 2;
-        } else if (infix.equals(")")) {
-            return 3;
-        } else if (infix.equals("(")) {
-            return 4;
-        } else {
-            return -1;
+        switch (infix) {
+            case "*":
+            case "/":
+                return 1;
+            case "+":
+            case "-":
+                return 2;
+            case ")":
+                return 3;
+            case "(":
+                return 4;
+            default:
+                return -1;
         }
     }
-
 }
