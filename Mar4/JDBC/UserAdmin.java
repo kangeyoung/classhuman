@@ -1,5 +1,6 @@
 package Mar4.JDBC;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserAdmin {
@@ -27,6 +28,10 @@ public class UserAdmin {
     }
 
     private void allList() {
+        ArrayList<UserDTO> userList = userDAO.selectAll();
+        for (UserDTO user : userList) {
+            user.prt();
+        }
     }
 
     private void add() {

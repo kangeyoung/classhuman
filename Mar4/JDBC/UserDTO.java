@@ -19,4 +19,8 @@ public class UserDTO {
     public void setId(String id) {
         this.id = id;
     }
+
+    public void prt() {
+        System.out.println("id: " + this.id + "\nname: " + this.name);
+    }
 }

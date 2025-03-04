@@ -1,8 +1,7 @@
 package Mar4.JDBC;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDAO {
     private String driver = "oracle.jdbc.driver.OracleDriver";
@@ -41,7 +40,27 @@ public class UserDAO {
             conn.close();
 
         }catch (Exception e) {
+        }
+    }
+
+    public ArrayList<UserDTO> selectAll() {
+        ArrayList<UserDTO> userList = new ArrayList<>();
+        // 연결설정, 쿼리만들기, 매핑, 쿼리실행, 리턴값받기
+        try {
+            Connection conn = DriverManager.getConnection(url, "system", "1111");
+            System.out.println("연결 성공");
+            String sql = "select * from user1";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                UserDTO user = new UserDTO();
+                user.setId(rs.getString("id"));
+                user.setName(rs.getString("name"));
+                userList.add(user);
+            }
+        }catch (Exception e) {
 
         }
+        return userList;
     }
 }
