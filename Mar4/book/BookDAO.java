@@ -1,9 +1,7 @@
 package Mar4.book;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class BookDAO {
     private String driver = "oracle.jdbc.driver.OracleDriver";
@@ -49,6 +47,48 @@ public class BookDAO {
             ps.setString(1, book.getUname());
             int result = ps.executeUpdate();
             System.out.println(result + "건 완료");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ArrayList<Book> selectAll(){
+        Connection conn = connection();
+        ArrayList<Book> bookList = new ArrayList<Book>();
+        String sql = "select * from booklist";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Book book = new Book();
+                book.setUname(rs.getString("uname"));
+                book.setBname(rs.getString("bname"));
+                book.setBdate(rs.getString("bdate"));
+                bookList.add(book);
+            }
+            return bookList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void delete(Book book) {
+        Connection conn = connection();
+        String sql = "delete from booklist where bname =?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, book.getBname());
+            int result = ps.executeUpdate();
+            System.out.println(result+"건 완료");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        String sql2 = "update userlist set bnum = bnum-1 where uname =?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql2);
+            ps.setString(1, book.getUname());
+            int result = ps.executeUpdate();
+            System.out.println(result+"건 완료");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

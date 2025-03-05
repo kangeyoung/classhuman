@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class UserAdmin {
-    private UserDAO userDAO = new UserDAO();
+    private UserDAO userDAO = UserDAO.getInstance();
 
     UserAdmin() {
         Scanner sc = new Scanner(System.in);
