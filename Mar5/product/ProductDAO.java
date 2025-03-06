@@ -39,6 +39,9 @@ public class ProductDAO {
         return 0;
     }
 
+    // 1. count(*)로 자바에서 id 조합해서 넣기 id = hm+count(*)
+    // 2. insert 쿼리문에 시퀀스 넣기 ?||seq.nextval
+    // 2-1. 오라클에서 id에 시퀀스 더해주는 트리거 넣기
     public void add(ProductDTO productDTO) throws SQLException {
         String sql = "insert into product values(?,?,?,?,?,?,?,default)";
         Connection conn = DriverManager.getConnection(url, id, pass);
@@ -63,13 +66,15 @@ public class ProductDAO {
         String sql;
         switch (i) {
             case 1:
-                sql = "select * from product order by id";
+                sql = "select id, name, quantity, price, typename, manager, description, indate from product p, typeP t where p.type = t.type order by p.id";
                 break;
             case 2:
-                sql = "select * from product where name like ? or description like ?";
+                sql = "select id, name, quantity, price, typename, manager, description, indate " +
+                        "from product p, typeP t where p.type = t.type and (name like ? or description like ?)";
                 break;
             case 3:
-                sql = "select * from product where type = ?";
+                sql = "select id, name, quantity, price, typename, manager, description, indate " +
+                        "from product p, typeP t where p.type = t.type and p.type = ?";
                 break;
             default:
                 System.out.println("오류");
@@ -77,16 +82,15 @@ public class ProductDAO {
         }
         Connection conn = DriverManager.getConnection(url, id, pass);
         ResultSet rs = null;
+        PreparedStatement pstmt = conn.prepareStatement(sql);
         switch (i) {
             case 1:
-                Statement stmt = conn.createStatement();
-                rs = stmt.executeQuery(sql);
+                rs = pstmt.executeQuery();
                 break;
             case 2:
-            case 3:
-                PreparedStatement pstmt = conn.prepareStatement(sql);
-                pstmt.setString(1, text);
                 pstmt.setString(2, text);
+            case 3:
+                pstmt.setString(1, text);
                 rs = pstmt.executeQuery();
                 break;
             default:
@@ -99,7 +103,7 @@ public class ProductDAO {
             productDTO.setName(rs.getString("name"));
             productDTO.setQuantity(rs.getString("quantity"));
             productDTO.setPrice(rs.getString("price"));
-            productDTO.setType(rs.getString("type"));
+            productDTO.setType(rs.getString("typename"));
             productDTO.setManager(rs.getString("manager"));
             productDTO.setDescription(rs.getString("description"));
             productDTO.setDate(rs.getString("indate"));
@@ -155,5 +159,17 @@ public class ProductDAO {
         }
         pstmt.close();
         conn.close();
+    }
+
+    public String seq() throws SQLException {
+        String seq = null;
+        String sql = "select seq.nextval from dual";
+        Connection conn = DriverManager.getConnection(url, id, pass);
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        if (rs.next()) {
+            seq = rs.getString(1);
+        }
+        return seq;
     }
 }

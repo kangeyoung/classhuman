@@ -73,7 +73,7 @@ public class ProductM {
     }
 
     private void search() throws SQLException {
-        System.out.println("1. 전체보기 2. 종류로 검색 3. 제품명 검색");
+        System.out.println("1. 전체보기 2. 종류로 검색 3. 부분 검색");
         Scanner sc = new Scanner(System.in);
         int choice = sc.nextInt();
         sc.nextLine();
@@ -87,7 +87,7 @@ public class ProductM {
                 productList = productDAO.select(3, type);
                 break;
             case 3:
-                System.out.println("제품 이름 입력(부분 검색 가능)");
+                System.out.println("제품명 또는 제품설명 검색(부분검색 가능)");
                 String name = "%" + sc.nextLine() + "%";
                 productList = productDAO.select(2, name);
                 break;
@@ -106,6 +106,7 @@ public class ProductM {
 
     private void add() throws SQLException {
         System.out.println("---ADD---");
+        ProductDTO productDTO = new ProductDTO();
         Scanner sc = new Scanner(System.in);
         System.out.println("제품 이름");
         String name = sc.nextLine();
@@ -118,10 +119,9 @@ public class ProductM {
         String manager = sc.nextLine();
         System.out.println("제품 설명");
         String description = sc.nextLine();
-        int num = productDAO.count();
-        String id = "hm" + (100 + num);
+        String seq = productDAO.seq();
+        String id = ProductDTO.hm + seq;
         System.out.println("제품 아이디= " + id);
-        ProductDTO productDTO = new ProductDTO();
         productDTO.setProductDTO(id, name, quantity, price, type, manager, description);
         productDAO.add(productDTO);
     }
@@ -136,19 +136,18 @@ public class ProductM {
             sc.nextLine();
             switch (cho) {
                 case 1:
-                    return "생필품(a)";
+                    return "a";
                 case 2:
-                    return "가전류(b)";
+                    return "b";
                 case 3:
-                    return "스포츠(c)";
+                    return "c";
                 case 4:
-                    return "자동차(d)";
+                    return "d";
                 default:
                     System.out.println("다시 선택");
                     break;
             }
         }
-
     }
 
 }

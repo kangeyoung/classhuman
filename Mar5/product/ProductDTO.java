@@ -1,6 +1,7 @@
 package Mar5.product;
 
 public class ProductDTO {
+    static final String hm = "hm";
     String id;
     String name;
     String quantity;
