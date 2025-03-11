@@ -94,7 +94,7 @@ public class AdminDAO extends SuperDAO {
         Connection conn = super.getConnection();
         String sql = "select * from reservation";
         ResultSet rs = null;
-        ArrayList<ReservationDTO> reservationList = null;
+        ArrayList<ReservationDTO> reservationList = new ArrayList<>();
         try {
             Statement stmt = conn.createStatement();
             rs = stmt.executeQuery(sql);
