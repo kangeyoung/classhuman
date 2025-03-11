@@ -1,0 +1,63 @@
+use mysql;
+
+drop table if exists passTicket,member;
+
+create table if not exists passTicket
+(
+    fPass   varchar(4) primary key,
+    fName   varchar(10) not null,
+    fDetail varchar(20) not null,
+    fPrice  int
+);
+
+create table if not exists member
+(
+    sId     varchar(10) primary key,
+    sPass   varchar(10) not null,
+    sName   varchar(10) not null,
+    sGender tinyint(1)  not null,
+    sAge    tinyint(2)  not null,
+    fPass   varchar(4),
+    foreign key (fPass) references passTicket (fPass)
+);
+
+create table if not exists reservation
+(
+    no    int primary key,
+    sId   varchar(10) not null,
+    fPass varchar(4)  not null,
+    rRide varchar(10) not null,
+    rTime datetime    not null,
+    foreign key (sId) references member (sId),
+    foreign key (fPass) references member (fPass)
+);
+
+create table if not exists administer
+(
+    aId       varchar(10) primary key,
+    aPass     varchar(10) not null,
+    aName     varchar(10) not null,
+    aGender   tinyint(1)  not null,
+    aAge      tinyint(2)  not null,
+    aPosition varchar(10) not null
+);
+
+insert into member value ('a1234', 1234, '강이영', 2, 29, null);
+update member
+set fPass = 1
+where sId = 'a1234';
+delete
+from member
+where sId = 'a1234';
+
+
+select *
+from member;
+select *
+from passTicket;
+select *
+from reservation;
+select *
+from administer;
+
+show databases;
