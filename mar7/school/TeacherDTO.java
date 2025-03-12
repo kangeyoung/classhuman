@@ -1,27 +1,21 @@
 package mar7.school;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-public class TeacherDTO extends PeopleS {
+@Setter
+public class TeacherDTO extends PeopleDTO {
     private String tSubject;
     private String tPosition;
 
-    public TeacherDTO(String id, String pass, String name, boolean gender, String className, String subject, String position) {
-       super.id = id;
-       super.pass = pass;
-       super.name = name;
-       super.gender = gender;
-       super.className = className;
-       tSubject = subject;
-       tPosition = position;
+    public TeacherDTO(String id, String pass, String name, boolean gender, String classNum, String tSubject, String tPosition) {
+        super.setId(id);
+        super.setPass(pass);
+        super.setName(name);
+        super.setGender(gender);
+        super.setClassNum(classNum);
+        this.tSubject = tSubject;
+        this.tPosition = tPosition;
     }
-
-    public String getGender(){
-        if(gender){
-            return "남";
-        }
-        return "여";
-    }
-
 }

@@ -1,8 +1,6 @@
 package mar7.school;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SuperDAO {
     String driver = "oracle.jdbc.driver.OracleDriver";
@@ -24,5 +22,22 @@ public class SuperDAO {
         conn = DriverManager.getConnection(url, id, pass);
         System.out.println("연결성공");
         return conn;
+    }
+
+    public boolean selectId(int num, String id) throws SQLException {
+        conn = Connection();
+        String sql;
+        if (num == 1) {
+            sql = "select count(*) from student where sId = ?";
+        } else {
+            sql = "select count(*) from teacher where tId = ?";
+        }
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) == 1;
+        }
+        return false;
     }
 }
