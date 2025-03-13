@@ -3,8 +3,9 @@ package javaProject.amusementPark.main;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
-public class SuperDAO {
+public abstract class SuperDAO<T> {
     String driver = "org.mariadb.jdbc.Driver";
     String url = "jdbc:mariadb://localhost:3306/mysql";
     String user = "root";
@@ -33,5 +34,10 @@ public class SuperDAO {
         }
         return conn;
     }
+
+    public List<T> selectAll(){
+        return null;
+    }
+
 
 }
