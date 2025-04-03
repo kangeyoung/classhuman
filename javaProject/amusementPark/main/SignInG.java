@@ -1,5 +1,7 @@
 package javaProject.amusementPark.main;
 
+import javaProject.amusementPark.administer.AdminDAO;
+import javaProject.amusementPark.administer.AdminDTO;
 import javaProject.amusementPark.member.MemDAO;
 import javaProject.amusementPark.member.MemDTO;
 
@@ -46,10 +48,12 @@ public class SignInG extends JFrame implements ActionListener {
     JButton submit = new JButton("가입");
     JButton ck = new JButton("중복검사");
     JPanel center = new JPanel();
-    JButton null_button = new JButton("null");
     boolean idck = false; //중복체크시 true
     JRadioButton m = new JRadioButton("남자");
     JRadioButton f = new JRadioButton("여자");
+    JRadioButton ad_button = new JRadioButton("관리자");
+    JRadioButton mm_button = new JRadioButton("회원");
+    ButtonGroup p_radio = new ButtonGroup();
 
     public SignInG(JFrame before) {
         this.setSize(400, 300);
@@ -183,13 +187,23 @@ public class SignInG extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         MemDAO memDAO = new MemDAO();
+        AdminDAO adminDAO = new AdminDAO();
         if (e.getSource() == ck) {
             String id = i_field.getText();
-            if (memDAO.idDuplicate(id)) {
-                idck = true;
-                JOptionPane.showMessageDialog(ck, "중복검사완료");
-            } else {
-                JOptionPane.showMessageDialog(ck, "아이디중복");
+            if (ad_button.isSelected()) {
+                if (adminDAO.idDuplicate(id)) {
+                    idck = true;
+                    JOptionPane.showMessageDialog(ck, "중복검사완료");
+                } else {
+                    JOptionPane.showMessageDialog(ck, "아이디중복");
+                }
+            } else if (mm_button.isSelected()) {
+                if (memDAO.idDuplicate(id)) {
+                    idck = true;
+                    JOptionPane.showMessageDialog(ck, "중복검사완료");
+                } else {
+                    JOptionPane.showMessageDialog(ck, "아이디중복");
+                }
             }
         }
         if (e.getSource() == submit) {
@@ -203,16 +217,40 @@ public class SignInG extends JFrame implements ActionListener {
     }
 
     private void signInDB() {
-        MemDTO memDTO = new MemDTO();
-        memDTO.setMId(i_field.getText());
-        memDTO.setMPass(p_field.getText());
-        memDTO.setMName(n_field.getText());
-        memDTO.setMGender(m.isSelected() ? 1 : 0);
-        String mBirth = yearCom.getSelectedItem().toString() + "-"
-                + monthCom.getSelectedItem().toString() + "-" + dayCom.getSelectedItem().toString();
-        memDTO.setBirth(mBirth);
-        System.out.println(memDTO.getMBirth().toString());
-        MemDAO memDAO = new MemDAO();
-        memDAO.insert(memDTO);
+        if (ad_button.isSelected()) {
+            String adNum = JOptionPane.showInputDialog(null, "관리자비밀번호");
+            AdminDTO adminDTO = new AdminDTO();
+            if (adNum.equals("1111")) {
+                adminDTO.setAPosition("a");
+            } else if (adNum.equals("2222")) {
+                adminDTO.setAPosition("b");
+            } else if (adNum.equals("3333")) {
+                adminDTO.setAPosition("c");
+            } else {
+                JOptionPane.showMessageDialog(null, "비밀번호 오류");
+                dispose();
+            }
+            adminDTO.setAId(i_field.getText());
+            adminDTO.setAPass(p_field.getText());
+            adminDTO.setAName(n_field.getText());
+            adminDTO.setAGender(m.isSelected() ? 1 : 0);
+            String aBirth = yearCom.getSelectedItem().toString() + "-"
+                    + monthCom.getSelectedItem().toString() + "-" + dayCom.getSelectedItem().toString();
+            adminDTO.setBirth(aBirth);
+            AdminDAO adminDAO = new AdminDAO();
+            adminDAO.insert(adminDTO);
+        } else if (mm_button.isSelected()) {
+            MemDTO memDTO = new MemDTO();
+            memDTO.setMId(i_field.getText());
+            memDTO.setMPass(p_field.getText());
+            memDTO.setMName(n_field.getText());
+            memDTO.setMGender(m.isSelected() ? 1 : 0);
+            String mBirth = yearCom.getSelectedItem().toString() + "-"
+                    + monthCom.getSelectedItem().toString() + "-" + dayCom.getSelectedItem().toString();
+            memDTO.setBirth(mBirth);
+            System.out.println(memDTO.getMBirth().toString());
+            MemDAO memDAO = new MemDAO();
+            memDAO.insert(memDTO);
+        }
     }
 }
