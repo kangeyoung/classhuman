@@ -60,4 +60,8 @@ public class WeatherService {
             }
         }
     }
+
+    public void addInfo(WeatherDTO weatherInfo) {
+        weatherDTOList.add(weatherInfo);
+    }
 }

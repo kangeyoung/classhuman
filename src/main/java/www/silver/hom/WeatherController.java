@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -26,7 +28,7 @@ public class WeatherController {
             wS.deleteInfo(deletes);
             System.out.println("200");
             return "wt";
-        } else if (city.equals("0")) {
+        } else if (city.equals("0")||city.isEmpty()) {
             return "wt";
         }
         List<WeatherDTO> list = wS.selectInfo(city);
@@ -34,10 +36,16 @@ public class WeatherController {
         return "wt";
     }
 
-//    @RequestMapping(value="/addUp", method=RequestMethod.GET)
-//    public String addUp(Model model, @RequestParam(required = false) WeatherDTO weatherDTO) {
-//
-//        return "redirect:/wt?city=" + weatherDTO.getCity();
-//    }
-
+    @RequestMapping(value = "/addUp", method = RequestMethod.GET)
+    public String add(HttpServletRequest request) {
+        String city = request.getParameter("city");
+        String weather = request.getParameter("weather");
+        int maxT= Integer.parseInt(request.getParameter("maxT"));
+        int minT= Integer.parseInt(request.getParameter("minT"));
+        WeatherDTO weatherInfo = new WeatherDTO(city,maxT,minT,weather);
+        wS.addInfo(weatherInfo);
+        StringBuilder sb = new StringBuilder("redirect:/wt?city=");
+        sb.append(URLEncoder.encode(weatherInfo.getCity(), StandardCharsets.UTF_8));
+        return sb.toString();
+    }
 }

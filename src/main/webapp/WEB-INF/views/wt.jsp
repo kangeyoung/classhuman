@@ -77,28 +77,27 @@
     </form>
     <div id="addmodule">
         <div id="addmodule_context">
-            <form id="addm" method="get">
+            <form id="addm" method="get" action="<c:url value="/addUp"/>">
                 <div class="form-row">
                     <span>시/도</span>
-                    <input type="text" placeholder="시/도 입력">
+                    <input type="text" name="city" placeholder="시/도 입력" required>
                 </div>
                 <div class="form-row">
                     <span>날씨</span>
-                    <input type="text" placeholder="날씨 입력">
+                    <input type="text" name="weather" placeholder="날씨 입력" required>
                 </div>
                 <div class="form-row">
                     <span>최고기온</span>
-                    <input type="text" placeholder="최고기온 입력">
+                    <input type="text" name="maxT" placeholder="최고기온 입력" required>
                 </div>
                 <div class="form-row">
                     <span>최저기온</span>
-                    <input type="text" placeholder="최저기온 입력">
+                    <input type="text" name="minT" placeholder="최저기온 입력" required>
                 </div>
                 <button type="submit">추가</button>
             </form>
         </div>
     </div>
-
 </div>
 </body>
 </html>
@@ -118,12 +117,12 @@
             }
         })
     }
-
     function addW() {
-        alert(11);
-        document.getElementById('addmodule').style.display='block';
+        document.getElementById('addmodule').style.display = 'block';
     }
-
+    function upW(){
+        St
+    }
     function checkAll(e) {
         const checkboxes = document.getElementsByName('delCheck');
         checkboxes.forEach((checkbox) => {

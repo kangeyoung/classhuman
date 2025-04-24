@@ -6,7 +6,7 @@ public class WeatherDTO {
     int minTemp;
     String weather;
 
-    public WeatherDTO(String city, int maxTemp, int minTemp, String weather) {
+    public WeatherDTO(String city, int maxTemp, int minTemp , String weather) {
         this.city = city;
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
