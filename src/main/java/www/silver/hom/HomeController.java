@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 /** aaa
  * Handles requests for the application home page.
@@ -27,8 +29,18 @@ public class HomeController {
 			{"1010","1012","1520","1350","1300"}};
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Model model, @RequestParam(required = false,defaultValue = "-1")String d) {
+	public String home(HttpServletRequest request, Model model, @RequestParam(required = false,defaultValue = "-1")String d) {
 		List<Train> trains = new ArrayList<Train>();
+		String[] checkboxes = request.getParameterValues("int");
+
+		if(checkboxes!=null) {
+			for (int i = 0; i < checkboxes.length; i++) {
+				int index = Integer.parseInt(checkboxes[i]);
+				trains.add(new Train(tdata[0][index], tdata[1][index], tdata[2][index], tdata[3][index]));
+			}
+			model.addAttribute("trains", trains);
+			return "home";
+		}
 		if(d.equals("-1")){
 			for(int i=0;i<5;i++) {
 				trains.add(new Train(tdata[0][i], tdata[1][i], tdata[2][i], tdata[3][i]));

@@ -51,6 +51,14 @@
             <option value="천안">천안</option>
             <option value="대구">대구</option>
         </select>
+        <form id="checkboxes" method="get">
+            <input type="checkbox" id="서울" name="int" value="0">서울
+            <input type="checkbox" id="대전" name="int" value="1">대전
+            <input type="checkbox" id="부산" name="int" value="2">부산
+            <input type="checkbox" id="천안" name="int" value="3">천안
+            <input type="checkbox" id="대구" name="int" value="4">대구
+            <button>선택</button>
+        </form>
     </div>
     <table id="list">
         <tr>
@@ -66,6 +74,9 @@
                 <td>${train.dTime }</td>
                 <td>${train.aTime }</td>
             </tr>
+            <script>
+                document.getElementById(`${train.region}`).checked = true;
+            </script>
         </c:forEach>
     </table>
 </div>
@@ -75,10 +86,12 @@
     function selDef() {
         location.href = "/hom_war_exploded/";
     }
+
     function selReText() {
         const text = document.getElementById("searchtext");
         location.href = "/hom_war_exploded/?d=" + text.value;
     }
+
     function selRe() {
         const sel = document.getElementById("sel");
         if (sel.value == 101) {

@@ -1,0 +1,68 @@
+.all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.sub1 {
+    display: flex;
+    justify-self: center;
+    gap: 10px;
+}
+
+#header {
+    background-color: cornflowerblue;
+    color: white;
+    width: 850px;
+    text-align: center;
+    padding: 20px;
+    font-size: 20px;
+}
+
+input[type= button],button {
+    background-color: cornflowerblue;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border: transparent;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+table input[type=button] {
+    background-color: cornflowerblue;
+    color: white;
+    border: transparent;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 70px;
+    height: 30px;
+}
+
+table {
+    text-align: center;
+    border-spacing: 0;
+}
+table th, table td{
+    border-bottom: 1px solid;
+    padding: 10px 25px;
+}
+
+table button {
+    background-color: cornflowerblue;
+    color: white;
+    border: transparent;
+    border-radius: 5px;
+    font-size: 15px;
+    width: 50px;
+    height: 25px;
+}
+
+input[type= text] {
+    width: 200px;
+    height: 30px;
+    border: 1px dot-dash;
+    border-radius: 5px;
+}
