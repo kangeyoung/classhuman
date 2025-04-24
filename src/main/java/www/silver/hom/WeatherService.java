@@ -31,7 +31,7 @@ public class WeatherService {
     public List<WeatherDTO> selectInfo(String city) {
         List<WeatherDTO> selList = new ArrayList<>();
         for (WeatherDTO weatherDTO : weatherDTOList) {
-            if (weatherDTO.getCity().equals(city) || city.equals("all")) {
+            if (weatherDTO.getCity().contains(city) || city.equals("all")) {
                 selList.add(weatherDTO);
             }
         }
@@ -48,5 +48,16 @@ public class WeatherService {
             }
         }
         return selList;
+    }
+
+    public void deleteInfo(String[] deletes) {
+        for(String delete:deletes) {
+            for (int i = weatherDTOList.size() - 1; i >= 0; i--) {
+                if (delete.equals(weatherDTOList.get(i).getCity())) {
+                    System.out.println("111");
+                    weatherDTOList.remove(weatherDTOList.get(i));
+                }
+            }
+        }
     }
 }

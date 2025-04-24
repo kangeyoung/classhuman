@@ -16,10 +16,15 @@ public class WeatherController {
     @RequestMapping(value = "/wt", method = RequestMethod.GET)
     public String mainP(HttpServletRequest request, Model model, @RequestParam(required = false, defaultValue = "0") String city) {
         String[] checkes = request.getParameterValues("searCheck");
+        String[] deletes = request.getParameterValues("delCheck");
         if (checkes != null) {
             System.out.println(checkes[0]);
             List<WeatherDTO> list = wS.selectInfo(checkes);
             model.addAttribute("list", list);
+            return "wt";
+        } else if (deletes != null) {
+            wS.deleteInfo(deletes);
+            System.out.println("200");
             return "wt";
         } else if (city.equals("0")) {
             return "wt";
@@ -28,5 +33,11 @@ public class WeatherController {
         model.addAttribute("list", list);
         return "wt";
     }
+
+//    @RequestMapping(value="/addUp", method=RequestMethod.GET)
+//    public String addUp(Model model, @RequestParam(required = false) WeatherDTO weatherDTO) {
+//
+//        return "redirect:/wt?city=" + weatherDTO.getCity();
+//    }
 
 }

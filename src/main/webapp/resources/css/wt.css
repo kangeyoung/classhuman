@@ -15,10 +15,14 @@
 #header {
     background-color: cornflowerblue;
     color: white;
-    width: 850px;
+    width: 600px;
     text-align: center;
     padding: 20px;
     font-size: 20px;
+}
+
+#chkbtn{
+    display: none;
 }
 
 input[type= button],button {
@@ -31,17 +35,8 @@ input[type= button],button {
     border-radius: 5px;
 }
 
-table input[type=button] {
-    background-color: cornflowerblue;
-    color: white;
-    border: transparent;
-    border-radius: 5px;
-    font-size: 15px;
-    width: 70px;
-    height: 30px;
-}
-
 table {
+    width: 600px;
     text-align: center;
     border-spacing: 0;
 }
@@ -50,7 +45,7 @@ table th, table td{
     padding: 10px 25px;
 }
 
-table button {
+table button, table input[type=button] {
     background-color: cornflowerblue;
     color: white;
     border: transparent;
@@ -66,3 +61,64 @@ input[type= text] {
     border: 1px dot-dash;
     border-radius: 5px;
 }
+
+#addmodule{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* 반투명 배경 */
+    z-index: 1000;
+}
+#addmodule_context{
+    background-color: white;
+    width: 300px;
+    /* 첫 구현보다 약간 넓게 */
+    min-height: 100px;
+    /* 세로 크기 크게 증가 */
+    padding: 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+#addmodule_context form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-row span {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.form-row input {
+    width: 150px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+
+

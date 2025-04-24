@@ -20,8 +20,9 @@
         <a href="/hom_war_exploded/wt?city=all"><input type="button" id="searchall" value="전국 날씨"></a>
         <input type="text" id="searchC" placeholder="시도 입력">
         <input type="button" id="search" value="검색">
+        <input type="button" id="checking" value="체크박스">
     </div>
-    <div style="text-align: center">
+    <div style="text-align: center" id="chkbtn">
         <form method="get">
             <label><input type="checkbox" name="searCheck" value="서울특별시">서울특별시</label>
             <label><input type="checkbox" name="searCheck" value="부산광역시">부산광역시</label>
@@ -46,7 +47,7 @@
     <form method="get">
         <table id="list">
             <tr>
-                <th><input type="button" value="전체선택" onclick="checkAll()"></th>
+                <th><input type="checkbox" value="전체선택" onclick="checkAll(this)"></th>
                 <th>시/도</th>
                 <th>날씨</th>
                 <th>최고기온</th>
@@ -65,19 +66,68 @@
             </c:forEach>
             <tr>
                 <td colspan="5" align="right">
+                    <input type="button" onclick="addW()" value="추가">
+                    &emsp; &emsp; &emsp;
+                    <input type="button" onclick="updateW()" value="수정">
+                    &emsp; &emsp; &emsp;
                     <button>삭제</button>
                 </td>
             </tr>
         </table>
     </form>
+    <div id="addmodule">
+        <div id="addmodule_context">
+            <form id="addm" method="get">
+                <div class="form-row">
+                    <span>시/도</span>
+                    <input type="text" placeholder="시/도 입력">
+                </div>
+                <div class="form-row">
+                    <span>날씨</span>
+                    <input type="text" placeholder="날씨 입력">
+                </div>
+                <div class="form-row">
+                    <span>최고기온</span>
+                    <input type="text" placeholder="최고기온 입력">
+                </div>
+                <div class="form-row">
+                    <span>최저기온</span>
+                    <input type="text" placeholder="최저기온 입력">
+                </div>
+                <button type="submit">추가</button>
+            </form>
+        </div>
+    </div>
+
 </div>
 </body>
 </html>
 <script>
-    window.onload= ()=>{
-        document.getElementById('search').addEventListener('click',()=>{
+    window.onload = () => {
+        let checkFlag = false;
+        document.getElementById('search').addEventListener('click', () => {
             const sWord = document.getElementById('searchC').value;
-            location.href = "/hom_war_exploded/wt?city="+sWord;
+            location.href = "/hom_war_exploded/wt?city=" + sWord;
+        })
+        document.getElementById('checking').addEventListener('click', () => {
+            checkFlag = !checkFlag;
+            if (checkFlag) {
+                document.getElementById('chkbtn').style.display = 'block';
+            } else {
+                document.getElementById('chkbtn').style.display = 'none';
+            }
+        })
+    }
+
+    function addW() {
+        alert(11);
+        document.getElementById('addmodule').style.display='block';
+    }
+
+    function checkAll(e) {
+        const checkboxes = document.getElementsByName('delCheck');
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = e.checked;
         })
     }
 </script>
