@@ -1,5 +1,7 @@
 package www.silver.hom;
 
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+
 
 @Controller
 public class WeatherController {
@@ -48,4 +51,5 @@ public class WeatherController {
         sb.append(URLEncoder.encode(weatherInfo.getCity(), StandardCharsets.UTF_8));
         return sb.toString();
     }
+
 }

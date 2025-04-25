@@ -24,7 +24,6 @@ public class WeatherService {
         weatherDTOList.add(new WeatherDTO("경상북도", 25, 8, "맑음"));
         weatherDTOList.add(new WeatherDTO("경상남도", 25, 8, "맑음"));
         weatherDTOList.add(new WeatherDTO("제주특별자치도", 26, 17, "맑음"));
-        System.out.println("100");
     }
 
 
