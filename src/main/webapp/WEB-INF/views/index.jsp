@@ -12,6 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<%@ include file="./common/top.jsp"%>
+<h3>메인화면</h3>
 </body>
 </html>
