@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- 오라클 bean -->
+    <bean
+            class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+            id="dataSource" >  <!--  한 개가 빈설정.. 객체 설정.. 객체만들어 달라고 하는 것.. -->
+        <property name="driverClassName"
+                  value="oracle.jdbc.driver.OracleDriver"> <!-- 객체의 변수 -->
+        </property>
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>
+        <property name="username" value="system"></property>
+        <property name="password" value="1111"></property>
+    </bean> <!-- POJO: 자바 코드를 바꾸지 않고 설정파일의 value만 바꾸면 된다.(ex. DB 바꿀 때) -->
+    <!--  factory bean  쿼리문 공장 -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="mapperLocations"
+                  value="classpath:/mapper/*Mapper.xml"></property> <!-- 쿼리문 만드는 공장 -->
+    </bean>
+    <!--  sqlsessionTemplate spring과 연동하기 위한 객체 -->
+    <bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+    </bean> <!-- spring은 VO를 넘기고 sqlsession에서는 vo를 받아서 factory에게 넘긴다.
+                factory는 vo를 받아서 쿼리문을 만든다.(매핑)
+                factory는 쿼리를 datasource에게 주어서 실행한다.-->
+</beans>
+
+        <!-- Root Context: defines shared resources visible to all other web components -->

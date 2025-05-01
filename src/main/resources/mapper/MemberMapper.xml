@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.dao.IF_MemberDAO">
+    <select id="login" parameterType="HashMap" resultType="kr.VO.MemberVO">
+        select * from member_travel where id= #{id, jdbcType=VARCHAR} and pass = #{pass, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertOne" parameterType="kr.VO.MemberVO">
+        insert into member_travel values(#{id},#{pass},#{name})
+    </insert>
+</mapper>
