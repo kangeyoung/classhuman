@@ -11,7 +11,7 @@
 <head>
     <title>Title</title>
 </head>
-<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/top.css"/>" >
+<link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/top.css?after"/>" >
 <body>
 <div id="headerTitle">
     <h3><a href="<c:url value="/"/>">휴먼 여행지 추천</a></h3>

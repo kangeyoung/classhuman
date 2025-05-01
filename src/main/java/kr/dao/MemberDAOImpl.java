@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @Repository
 public class MemberDAOImpl implements IF_MemberDAO {
@@ -14,23 +15,24 @@ public class MemberDAOImpl implements IF_MemberDAO {
     SqlSession sqlSession;
 
     @Override
-    public int login(String id, String pass) {
+    public MemberVO login(String id, String pass) {
         HashMap<String, String> map = new HashMap<>();
         map.put("id", id);
         map.put("pass", pass);
-        MemberVO memberVO = sqlSession.selectOne("kr.dao.IF_MemberDAO.login", map);
-        if (memberVO != null) { // 로그인 성공
-            System.out.println(memberVO.getId());
-            return 1;
-        } else {
-            return 0;
-        }
+        MemberVO mvo = sqlSession.selectOne("kr.dao.IF_MemberDAO.login", map);
+        return mvo;
     }
 
     @Override
     public int insertMember(MemberVO mvo) {
-        int suc =sqlSession.insert("kr.dao.IF_MemberDAO.insertOne", mvo);
+        int suc = sqlSession.insert("kr.dao.IF_MemberDAO.insertOne", mvo);
         System.out.println(suc);
         return suc;
+    }
+
+    @Override
+    public MemberVO selectId(String id) {
+        MemberVO mvo = sqlSession.selectOne("kr.dao.IF_MemberDAO.selectId", id);
+        return mvo;
     }
 }

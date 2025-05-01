@@ -10,4 +10,8 @@
     <insert id="insertOne" parameterType="kr.VO.MemberVO">
         insert into member_travel values(#{id},#{pass},#{name})
     </insert>
+
+    <select id="selectId" parameterType="string" resultType="kr.VO.MemberVO">
+        select * from member_travel where id=#{id}
+    </select>
 </mapper>

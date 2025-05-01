@@ -13,27 +13,33 @@ public class MemberController {
     @Inject
     MemberServiceImpl memberService;
 
-    @RequestMapping(value="/login", method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         return "member/login";
     }
 
-    @RequestMapping(value="/loginIn", method = RequestMethod.POST)
+    @RequestMapping(value = "/loginIn", method = RequestMethod.POST)
     public String loginIn(Model model, @RequestParam String id, @RequestParam String pass) {
         System.out.println(id);
         int login = memberService.login(id, pass); // 로그인 성공 시 1 실패 시 0
-        if (login == 1){
+        if (login == 1) {
             return "redirect:/write";
-        }else{
+        } else {
             model.addAttribute("login", "실패>회원가입");
             return "member/login";
         }
     }
 
-    @RequestMapping(value="/signUp", method = RequestMethod.POST)
+    @RequestMapping(value = "/dupId", method = RequestMethod.POST)
+    @ResponseBody
+    public int dupId(Model model, @RequestParam String id) {
+        return memberService.dupId(id);
+    }
+
+    @RequestMapping(value = "/signUp", method = RequestMethod.POST)
     public String signUp(Model model, @ModelAttribute MemberVO mvo) {
         System.out.println(mvo.getId());
-        int insert = memberService.insert(mvo);
+        int insert = memberService.insert(mvo); // 중복 있으면 1 없으면 0
         return "member/login";
     }
 }
